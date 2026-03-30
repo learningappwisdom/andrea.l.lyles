@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Andrea Lyles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #1a2a3a;
+    --steel: #2e4a62;
+    --slate: #4a6278;
+    --mist: #8fa8bc;
+    --frost: #c8d8e4;
+    --pearl: #eaf1f6;
+    --white: #f8fbfd;
+    --ink: #1a2a3a;
+    --mid: #4a6278;
+    --light: #8fa8bc;
+    --accent: #3a7ca5;
+    --accent-soft: #ddeef7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,251,253,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--frost);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+  }
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 55%, var(--slate) 100%);
+    padding: 100px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -80px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,124,165,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: 10%;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,216,228,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    border: 1px solid rgba(143,168,188,0.4);
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1.8rem;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    color: #f0f5f9;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-name em {
+    font-style: normal;
+    color: var(--mist);
+  }
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: rgba(200,216,228,0.85);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #2e6a91; transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-block;
+    border: 1px solid rgba(200,216,228,0.45);
+    color: var(--frost);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--frost); color: #fff; }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5%; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-intro {
+    font-size: 1rem;
+    color: var(--slate);
+    max-width: 640px;
+    margin-bottom: 3.5rem;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    max-width: 1100px;
+  }
+  .about-text p {
+    color: var(--slate);
+    margin-bottom: 1.2rem;
+    font-size: 0.97rem;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .skill-chip {
+    background: var(--pearl);
+    border: 1px solid var(--frost);
+    border-radius: 3px;
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    color: var(--steel);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .skills-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── PORTFOLIO ── */
+  #portfolio { background: var(--pearl); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--frost);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(26,42,58,0.1);
+  }
+  .card-header {
+    padding: 1.8rem 2rem 1.4rem;
+    border-bottom: 1px solid var(--frost);
+    display: flex; align-items: flex-start; gap: 1.1rem;
+  }
+  .card-icon {
+    width: 44px; height: 44px; min-width: 44px;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+  }
+  .icon-blue  { background: #ddeef7; }
+  .icon-teal  { background: #d6eae6; }
+  .icon-slate { background: #e0e8f0; }
+  .icon-mist  { background: #e8eff5; }
+  .card-meta { flex: 1; }
+  .card-category {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .card-body { padding: 1.6rem 2rem 2rem; }
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--slate);
+    font-weight: 300;
+    line-height: 1.85;
+    margin-bottom: 1.4rem;
+  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--steel);
+    background: var(--pearl);
+    border: 1px solid var(--frost);
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+  }
+  .card-expand {
+    display: none;
+    padding: 0 2rem 2rem;
+    border-top: 1px solid var(--frost);
+    margin-top: 0;
+  }
+  .card-expand.open { display: block; padding-top: 1.6rem; }
+  .expand-section-title {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 0.7rem;
+    margin-top: 1.2rem;
+  }
+  .expand-section-title:first-child { margin-top: 0; }
+  .expand-content {
+    font-size: 0.88rem;
+    color: var(--slate);
+    font-weight: 300;
+    line-height: 1.9;
+  }
+  .expand-content ul { list-style: none; padding: 0; }
+  .expand-content ul li {
+    padding: 0.35rem 0 0.35rem 1.1rem;
+    position: relative;
+    border-bottom: 1px solid var(--pearl);
+  }
+  .expand-content ul li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--mist);
+    font-size: 0.75rem;
+  }
+  .view-btn {
+    background: none;
+    border: 1px solid var(--frost);
+    color: var(--slate);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 1.4rem;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .view-btn:hover {
+    background: var(--pearl);
+    border-color: var(--mist);
+    color: var(--navy);
+  }
+
+  /* ── PROCESS ── */
+  #process { background: var(--white); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+  }
+  .step {
+    position: relative;
+    padding: 2rem 1.8rem;
+    background: var(--white);
+    border: 1px solid var(--frost);
+    border-radius: 3px;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--frost);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+  }
+  .step-desc {
+    font-size: 0.86rem;
+    color: var(--slate);
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+    text-align: center;
+  }
+  #contact .section-label { color: var(--mist); }
+  #contact .section-title { color: #f0f5f9; }
+  #contact .section-intro { color: rgba(200,216,228,0.8); margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--frost);
+    text-decoration: none;
+    border: 1px solid rgba(200,216,228,0.3);
+    padding: 0.85rem 1.8rem;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .contact-link:hover {
+    border-color: var(--frost);
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,216,228,0.08);
+    text-align: center;
+    padding: 2rem 5%;
+    font-size: 0.78rem;
+    color: rgba(143,168,188,0.6);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Andrea Lyles</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Learning &amp; Development · Technical Writing · Instructional Design</span>
+    <h1 class="hero-name">Andrea<br/><em>Lyles</em></h1>
+    <p class="hero-subtitle">Strategic L&amp;D professional who transforms complex systems into clear, scalable learning experiences — from content architecture and knowledge management to enterprise onboarding and curriculum design.</p>
+    <div class="hero-cta-group">
+      <a href="#portfolio" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">Where strategy meets<br/>structured clarity</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a Learning &amp; Development professional with a background spanning technical writing, organizational development, and enterprise training. My work sits at the intersection of content strategy and human performance — building systems that help people learn, onboard, and grow with confidence.</p>
+      <p>Over the course of my career I've designed end-to-end onboarding programs, orchestrated large-scale content migrations, built learning pathways for diverse lines of business, and partnered with SMEs to translate complex processes into documentation that actually gets used.</p>
+      <p>I hold an M.A. in Talent Development from Tusculum University and a B.S. in Business Administration from Bryan College. I bring both the strategic perspective and the hands-on execution skills to see every project from kickoff to delivery.</p>
+    </div>
+    <div class="about-skills">
+      <div class="skills-title">Tools &amp; Expertise</div>
+      <div class="skills-grid">
+        <div class="skill-chip">MadCap Flare</div>
+        <div class="skill-chip">Confluence</div>
+        <div class="skill-chip">Degreed Pathways</div>
+        <div class="skill-chip">LinkedIn Learning</div>
+        <div class="skill-chip">Jira</div>
+        <div class="skill-chip">Google Workspace</div>
+        <div class="skill-chip">Microsoft 365</div>
+        <div class="skill-chip">Gemini AI</div>
+        <div class="skill-chip">WordPress</div>
+        <div class="skill-chip">Instructional Design</div>
+        <div class="skill-chip">Content Strategy</div>
+        <div class="skill-chip">Knowledge Management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Selected Work Samples</h2>
+  <p class="section-intro">The following samples are representative, non-proprietary examples based on the types of projects I have led throughout my career in L&amp;D and technical writing.</p>
+
+  <div class="portfolio-grid">
+
+    <!-- CARD 1: Process / Technical Documentation -->
+    <div class="card reveal">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📄</div>
+        <div class="card-meta">
+          <div class="card-category">Process &amp; Technical Documentation</div>
+          <div class="card-title">System Migration Process Guide</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A step-by-step process document outlining the workflow for migrating a legacy client management platform to a new enterprise system — designed for both technical teams and business operations staff.</p>
+        <div class="card-tags">
+          <span class="tag">MadCap Flare</span>
+          <span class="tag">Process Mapping</span>
+          <span class="tag">Technical Writing</span>
+          <span class="tag">Cross-functional</span>
+        </div>
+        <button class="view-btn" onclick="toggleCard(this)">View Sample ↓</button>
+      </div>
+      <div class="card-expand">
+        <div class="expand-section-title">Overview</div>
+        <div class="expand-content">
+          This document was designed to support a multi-phase platform migration affecting 200+ users across three business units. The goal was to reduce support tickets by providing clear, role-specific guidance that non-technical users could follow independently.
+        </div>
+        <div class="expand-section-title">Document Excerpt — Pre-Migration Checklist</div>
+        <div class="expand-content">
+          <ul>
+            <li>Confirm data export from legacy system is complete and validated against record count</li>
+            <li>Notify all affected users of migration window (minimum 5 business days in advance)</li>
+            <li>Disable write-access to legacy system 24 hours prior to cutover</li>
+            <li>Verify that user accounts in new system are provisioned and tested by IT lead</li>
+            <li>Run parallel access test: confirm at least one user per role can log in successfully</li>
+            <li>Archive legacy system documentation in shared drive under /Archive/[ProjectName]/[Year]</li>
+            <li>Confirm rollback plan is documented and approved by project sponsor</li>
+          </ul>
+        </div>
+        <div class="expand-section-title">Outcomes &amp; Impact</div>
+        <div class="expand-content">
+          Migration completed on schedule with zero data loss. Support ticket volume related to the migration dropped by 40% compared to a prior migration event, attributed to clearer pre- and post-migration documentation.
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Onboarding Program Design -->
+    <div class="card reveal">
+      <div class="card-header">
+        <div class="card-icon icon-teal">🎓</div>
+        <div class="card-meta">
+          <div class="card-category">Onboarding Program Design</div>
+          <div class="card-title">New Hire Onboarding Program: Enterprise SaaS</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A 30-60-90 day onboarding program framework developed for a SaaS benefits platform, covering role-specific learning milestones, resource site architecture, and performance checkpoints.</p>
+        <div class="card-tags">
+          <span class="tag">Degreed Pathways</span>
+          <span class="tag">Curriculum Design</span>
+          <span class="tag">Stakeholder Alignment</span>
+          <span class="tag">New Hire Experience</span>
+        </div>
+        <button class="view-btn" onclick="toggleCard(this)">View Sample ↓</button>
+      </div>
+      <div class="card-expand">
+        <div class="expand-section-title">Program Overview</div>
+        <div class="expand-content">
+          Designed for a 60-person customer operations team onboarding to two SaaS benefits platforms. The program replaced an ad-hoc shadowing model with a structured, measurable curriculum tied to role competencies and 90-day performance expectations.
+        </div>
+        <div class="expand-section-title">Program Structure — 30 / 60 / 90 Day Milestones</div>
+        <div class="expand-content">
+          <ul>
+            <li><strong>Day 1–30 (Foundation):</strong> Platform navigation, core product knowledge, internal tools orientation, and compliance requirements. Delivered via Degreed Pathways + live facilitated sessions.</li>
+            <li><strong>Day 31–60 (Application):</strong> Role-specific workflow training, case shadowing, and guided practice using real client scenarios (anonymized). QA tracking begins.</li>
+            <li><strong>Day 61–90 (Independence):</strong> Solo case handling with manager check-ins, performance barometer review, and feedback loop with L&amp;D to refine future cohorts.</li>
+          </ul>
+        </div>
+        <div class="expand-section-title">Stakeholder Touchpoints</div>
+        <div class="expand-content">
+          Program included bi-weekly reporting to department leadership with onboarding progress dashboards, and a post-90-day survey to measure learner confidence and identify content gaps.
+        </div>
+        <div class="expand-section-title">Outcomes</div>
+        <div class="expand-content">
+          Time-to-productivity reduced by approximately 3 weeks. Learner confidence scores (self-reported at 90 days) increased by 28% compared to the prior unstructured cohort.
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Learning Pathways & Curriculum -->
+    <div class="card reveal">
+      <div class="card-header">
+        <div class="card-icon icon-slate">🗺️</div>
+        <div class="card-meta">
+          <div class="card-category">Learning Pathways &amp; Curriculum</div>
+          <div class="card-title">Role-Based Upskilling Pathway: Operations Track</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A curated multi-track learning pathway built in Degreed for an operations team, mapping LinkedIn Learning content, internal documentation, and custom modules to specific role levels and career growth goals.</p>
+        <div class="card-tags">
+          <span class="tag">Degreed</span>
+          <span class="tag">LinkedIn Learning</span>
+          <span class="tag">Career Development</span>
+          <span class="tag">Content Curation</span>
+        </div>
+        <button class="view-btn" onclick="toggleCard(this)">View Sample ↓</button>
+      </div>
+      <div class="card-expand">
+        <div class="expand-section-title">Design Rationale</div>
+        <div class="expand-content">
+          Leadership identified a gap between onboarding completion and long-term engagement. This pathway was designed to give employees a clear, self-directed route for growth beyond the first 90 days — tied to defined competency levels and visible within their Degreed profile.
+        </div>
+        <div class="expand-section-title">Track Structure (Operations Associate → Senior)</div>
+        <div class="expand-content">
+          <ul>
+            <li><strong>Foundation Track:</strong> Core systems fluency, communication skills, intro to data tools (LinkedIn Learning curated playlist, ~6 hrs)</li>
+            <li><strong>Intermediate Track:</strong> Workflow optimization, cross-team collaboration, process documentation fundamentals (internal modules + LinkedIn Learning)</li>
+            <li><strong>Advanced Track:</strong> Project leadership, coaching peers, contributing to SOPs, presenting to leadership</li>
+            <li><strong>Stretch Goals:</strong> Optional modules in data analysis, change management, and business writing for high-performers</li>
+          </ul>
+        </div>
+        <div class="expand-section-title">Curation Approach</div>
+        <div class="expand-content">
+          Each module was reviewed against role competency definitions before inclusion. Third-party content (LinkedIn Learning) was supplemented with internal documentation to ensure platform-specific relevance. Pathway was reviewed quarterly and updated based on learner feedback and LOB changes.
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: Knowledge Management / Content Migration -->
+    <div class="card reveal">
+      <div class="card-header">
+        <div class="card-icon icon-mist">🗄️</div>
+        <div class="card-meta">
+          <div class="card-category">Knowledge Management &amp; Content Migration</div>
+          <div class="card-title">Enterprise Knowledge Base Migration &amp; Taxonomy Design</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">End-to-end project to audit, restructure, and migrate a fragmented internal knowledge base from multiple source systems into a unified Confluence architecture — including content lifecycle governance and a new taxonomy framework.</p>
+        <div class="card-tags">
+          <span class="tag">Confluence</span>
+          <span class="tag">MadCap Flare</span>
+          <span class="tag">Content Audit</span>
+          <span class="tag">Information Architecture</span>
+          <span class="tag">Jira</span>
+        </div>
+        <button class="view-btn" onclick="toggleCard(this)">View Sample ↓</button>
+      </div>
+      <div class="card-expand">
+        <div class="expand-section-title">Project Scope</div>
+        <div class="expand-content">
+          Inherited a knowledge base of 400+ documents spread across Google Drive folders, SharePoint sites, and a legacy intranet — with no consistent naming conventions, outdated content, and no owner accountability. Project goal: migrate all active content to Confluence with a sustainable governance model.
+        </div>
+        <div class="expand-section-title">Migration Workflow</div>
+        <div class="expand-content">
+          <ul>
+            <li><strong>Phase 1 — Audit:</strong> Inventoried all existing content, flagged outdated/duplicate documents, and assigned preliminary content owners by LOB</li>
+            <li><strong>Phase 2 — Taxonomy Design:</strong> Developed a three-tier taxonomy (Business Unit → Function → Document Type) with standardized naming conventions</li>
+            <li><strong>Phase 3 — Migration:</strong> Migrated active content to Confluence in structured sprints tracked in Jira; retired 38% of audited content as outdated or redundant</li>
+            <li><strong>Phase 4 — Governance:</strong> Established a quarterly content review cadence, content owner accountability framework, and a "last reviewed" metadata standard</li>
+          </ul>
+        </div>
+        <div class="expand-section-title">Outcomes</div>
+        <div class="expand-content">
+          Search success rate (users finding the right document on first attempt) increased by 52% post-migration based on a 30-day post-launch survey. Content owner accountability increased with 90% of documents assigned to a named owner with review dates set.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label">How I Work</div>
+  <h2 class="section-title">My Approach</h2>
+  <p class="section-intro">Whether I'm building a learning program from scratch or migrating a fragmented knowledge base, I follow a consistent framework that keeps people, purpose, and precision at the center.</p>
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Discover &amp; Align</div>
+      <div class="step-desc">Partner with stakeholders and SMEs to understand business goals, learner needs, and existing gaps before any content is created.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <div class="step-title">Audit &amp; Map</div>
+      <div class="step-desc">Inventory what exists, identify what's missing, and design a clear information architecture or curriculum map before building.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <div class="step-title">Build &amp; Structure</div>
+      <div class="step-desc">Develop content with consistency, accessibility, and the end user in mind — whether that's a process doc, a pathway, or a full program.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <div class="step-title">Deliver &amp; Iterate</div>
+      <div class="step-desc">Launch with stakeholder buy-in, track performance and learner feedback, and refine continuously so content stays relevant and useful.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Open to New Opportunities</h2>
+  <p class="section-intro">I'm currently exploring my next role in Learning &amp; Development, Technical Writing, or Instructional Design. I'd love to connect.</p>
+  <div class="contact-links">
+    <a href="mailto:andrea.l.lyles@gmail.com" class="contact-link">✉ Email Me</a>
+    <a href="https://www.linkedin.com/in/andrea-lyles-m-a-5904831b6" target="_blank" class="contact-link">in LinkedIn</a>
+    <a href="tel:8652924894" class="contact-link">☎ (865) 292-4894</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Andrea Lyles · Athens, Tennessee
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Card expand/collapse
+  function toggleCard(btn) {
+    const card = btn.closest('.card');
+    const expand = card.querySelector('.card-expand');
+    const isOpen = expand.classList.contains('open');
+    expand.classList.toggle('open', !isOpen);
+    btn.textContent = isOpen ? 'View Sample ↓' : 'Close Sample ↑';
+  }
+</script>
+</body>
+</html>
